@@ -1,23 +1,29 @@
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/react';
-import React from 'react';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonImg, IonLabel, IonThumbnail } from '@ionic/react';
+import React, { useState } from 'react';
+import Movie from '../testjson/testJson';
 
 const Home: React.FunctionComponent = () => {
+
+  const [listing, setTest ] = useState(Movie)
+
   return (
     <>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Ionic Blank</IonTitle>
+          <IonTitle>Movie list</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        The world is your oyster.
-        <p>
-          If you get lost, the{' '}
-          <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/">
-            docs
-          </a>{' '}
-          will be your guide.
-        </p>
+        <IonList>
+          {listing.map((item, index) => {return(
+            <IonItem key={index}>
+              <IonThumbnail slot="start">
+                <IonImg src={item.img} style={{width:'70px'}}/>
+              </IonThumbnail>
+                <IonLabel>{item.description}</IonLabel>
+            </IonItem>
+          )} )}
+        </IonList>
       </IonContent>
     </>
   );
